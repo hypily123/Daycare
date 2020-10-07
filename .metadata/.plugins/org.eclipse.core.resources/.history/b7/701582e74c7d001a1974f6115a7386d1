@@ -1,0 +1,125 @@
+package SwingUI;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import SubjectClass.Classroom;
+import SubjectClass.DayCareRule;
+import SubjectClass.Daycare_rule;
+
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JComboBox;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class ClassroomUI extends JFrame {
+
+	private JFrame frame;
+	private JComboBox classroomCbb;
+
+	/**
+	 * Create the frame.
+	 */
+	public ClassroomUI(DayCareRule dcr) {
+
+		frame = new JFrame();
+		frame.getContentPane().setForeground(Color.LIGHT_GRAY);
+		frame.getContentPane().setBackground(Color.WHITE);
+		frame.setBounds(100, 100, 725, 510);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+
+		setTitle("Create a New Classroom");
+		setBounds(100, 100, 724, 501);
+		getContentPane().setLayout(null);
+
+		JPanel panel = new JPanel();
+		panel.setBounds(0, 0, 708, 462);
+		getContentPane().add(panel);
+		panel.setLayout(null);
+
+		JLabel lblCapacity = new JLabel("Capacity:");
+		lblCapacity.setForeground(Color.DARK_GRAY);
+		lblCapacity.setFont(new Font("Sitka Banner", Font.BOLD, 24));
+		lblCapacity.setBounds(179, 105, 126, 45);
+		panel.add(lblCapacity);
+
+		//classroom comboBox
+		classroomCbb = new JComboBox<String>();
+		classroomCbb.setFont(new Font("Lucida Grande", Font.PLAIN, 24));
+		classroomCbb.setBounds(317, 105, 200, 45);
+		panel.add(classroomCbb);
+		classroomCbb.setEditable(false);
+
+		//		classRcomboBox.setEnabled(true);
+		classroomCbb.addItem("2 Groups");
+		classroomCbb.addItem("3 Groups");
+		panel.add(classroomCbb, BorderLayout.SOUTH);
+
+		JButton btnAddClassroom = new JButton("Add Classroom");
+		btnAddClassroom.setBounds(234, 222, 183, 45);
+		btnAddClassroom.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
+		panel.add(btnAddClassroom);
+		btnAddClassroom.setIcon(
+				new ImageIcon(TeacherUI.class.getResource("/com/sun/javafx/scene/web/skin/Paste_16x16_JFX.png")));
+		panel.add(btnAddClassroom);
+
+		//btnAddClassroom addActionListener
+		btnAddClassroom.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					addValueActionPerformed(e);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(ClassroomUI.class.getResource("/images/background.jpg")));
+		lblNewLabel.setBounds(0, 0, 708, 462);
+		panel.add(lblNewLabel);
+	}
+
+	private void addValueActionPerformed(ActionEvent e) throws IOException {
+
+		File file = 
+				new File("./Classrooms.csv");
+		// create FileWriter object with file as parameter 
+		FileWriter filewriter = new FileWriter(file, true);  //true means rewritable
+
+		//create classroom obj
+		String groupType = classroomCbb.getSelectedItem().toString();
+		int capacity = 0;
+		if(groupType.equals(null)) {
+			JOptionPane.showMessageDialog(null, "please select a classroom type");
+		}
+		if(groupType.equals("2 Groups")) capacity = 2;
+		else capacity = 3;
+
+		Classroom classroom = new Classroom(capacity);
+
+		//update csv file
+		filewriter.append(classroom.getClassroomID() + "");
+
+		filewriter.append(",");
+		filewriter.append(capacity + "");
+		filewriter.append("\n");
+
+		filewriter.close();
+
+		dispose();
+	}
+
+}

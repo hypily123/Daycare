@@ -1,0 +1,328 @@
+package SubjectClass;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+
+public class DayCareRule {
+	private int groupSize;
+	private String teacherType;
+
+	//add classroom before adding teacher
+	public boolean hasClassroom() {
+		File file = new File("./Classrooms.csv");
+		if(file.exists() && file.length() == 0) {
+			JOptionPane.showMessageDialog(null, "Please add a classroom first");
+			return false;
+		}
+		return true;
+	}
+	//add teacher before adding student
+	public boolean hasTeacher() {
+		File file = new File("./Teachers.csv");
+		if(file.exists() && file.length() == 0) {
+			JOptionPane.showMessageDialog(null, "Please add a teacher first");
+			return false;
+		}
+		return true;
+	}
+
+	//show classroom with selected type in classroomCbb
+	public void showClassroomWith(String tType, JComboBox<String> classroomCbb) throws IOException {
+		if(tType.equals("6-12") || tType.equals("13-24") || tType.equals("25-35") || tType.equals("36-47")) {
+			File cFile = new File("./Classrooms.csv");
+			FileReader cFR = new FileReader(cFile);
+			BufferedReader cBR = new BufferedReader(cFR);
+			String s;
+			//classroomCbb.removeAllItems();
+			while((s = cBR.readLine()) != null) {
+				//String cString = cBR.readLine();
+				String[] line = s.split(",");
+
+				//check if the classroom is full
+				String curClassroomID = line[0];
+				String curCapacity = line[1];
+				if(curCapacity.equals("3") && line.length < 6) {
+					//not full
+					//classroomCbb.removeAllItems();
+					classroomCbb.addItem("Classroom " + curClassroomID);
+				}
+			}
+			if(classroomCbb.equals(null)) {
+				JOptionPane.showMessageDialog(null, "no satisfied classroom");
+			}
+			cBR.close();
+			cFR.close();
+			
+		}
+		if(tType.equals("48-59") || tType.equals("60 on up")) {
+			File cFile = new File("./Classrooms.csv");
+			FileReader cFR = new FileReader(cFile);
+			BufferedReader cBR = new BufferedReader(cFR);
+			String s;
+			//classroomCbb.removeAllItems();
+			while((s = cBR.readLine()) != null) {
+				//String cString = cBR.readLine();
+				String[] line = s.split(",");
+
+				//check if the classroom if full
+				String curClassroomID = line[0];
+				String curCapacity = line[1];
+				if(curCapacity.equals("2")  && line.length < 5) {
+					//not full
+					//classroomCbb.removeAllItems();
+					classroomCbb.addItem("Classroom" + curClassroomID);
+				}
+			}
+			if(classroomCbb.equals(null)) {
+				JOptionPane.showMessageDialog(null, "no satisfied classroom");
+			}
+			cBR.close();
+			cFR.close();
+		}
+	}
+
+	public void showTeachersWith(int age, JComboBox<String> teacherChooseCbb) throws IOException {
+		//6-12
+		if(age >= 6 && age <= 12 ) {
+			File tFile = new File("./Teachers.csv");
+			FileReader tFR = new FileReader(tFile);
+			BufferedReader tBR = new BufferedReader(tFR);
+			String s;
+			//teacherChooseCbb.removeAllItems();
+			while((s = tBR.readLine()) != null) {
+				//String tString = tBR.readLine();
+				String[] line = s.split(",");
+
+				//check if the teacher's group is full
+				String curTeacherID = line[0];
+				String curTeacherType = line[5];
+				if(curTeacherType.equals("6-12") && line.length < 6 + 4) {
+					//not full
+					//teacherChooseCbb.removeAllItems();
+					teacherChooseCbb.addItem("Teacher" + curTeacherID);
+				}
+			}
+			if(teacherChooseCbb.equals(null)) {
+				JOptionPane.showMessageDialog(null, "no satisfied teacher");
+			}
+			tBR.close();
+			tFR.close();
+		}
+		//13-24
+		if(age >= 13 && age <= 24 ) {
+			File tFile = new File("./Teachers.csv");
+			FileReader tFR = new FileReader(tFile);
+			BufferedReader tBR = new BufferedReader(tFR);
+			String s;
+			//teacherChooseCbb.removeAllItems();
+			while((s = tBR.readLine()) != null) {
+				//String tString = tBR.readLine();
+				String[] line = s.split(",");
+
+				//check if the teacher's group is full
+				String curTeacherID = line[0];
+				String curTeacherType = line[5];
+				if(curTeacherType.equals("13-24") && line.length < 6 + 5) {
+					//not full
+					//teacherChooseCbb.removeAllItems();
+					teacherChooseCbb.addItem("Teacher" + curTeacherID);
+				}
+			}
+			if(teacherChooseCbb.equals(null)) {
+				JOptionPane.showMessageDialog(null, "no satisfied teacher");
+			}
+			tBR.close();
+			tFR.close();
+			
+		}
+		//25-35
+		if(age >= 25 && age <= 35 ) {
+			File tFile = new File("./Teachers.csv");
+			FileReader tFR = new FileReader(tFile);
+			BufferedReader tBR = new BufferedReader(tFR);
+			String s;
+			//teacherChooseCbb.removeAllItems();
+			while((s = tBR.readLine()) != null) {
+				//String tString = tBR.readLine();
+				String[] line = s.split(",");
+
+				//check if the teacher's group is full
+				String curTeacherID = line[0];
+				String curTeacherType = line[5];
+				if(curTeacherType.equals("25-35") && line.length < 6 + 6) {
+					//not full
+					//teacherChooseCbb.removeAllItems();
+					teacherChooseCbb.addItem("Teacher" + curTeacherID);
+				}
+			}
+			if(teacherChooseCbb.equals(null)) {
+				JOptionPane.showMessageDialog(null, "no satisfied teacher");
+			}
+			tBR.close();
+			tFR.close();
+			
+		}
+		//36-47
+		if(age >= 36 && age <= 47 ) {
+			File tFile = new File("./Teachers.csv");
+			FileReader tFR = new FileReader(tFile);
+			BufferedReader tBR = new BufferedReader(tFR);
+			String s;
+			//teacherChooseCbb.removeAllItems();
+			while((s = tBR.readLine()) != null) {
+				//String tString = tBR.readLine();
+				String[] line = s.split(",");
+
+				//check if the teacher's group is full
+				String curTeacherID = line[0];
+				String curTeacherType = line[5];
+				if(curTeacherType.equals("36-47") && line.length < 6 + 8) {
+					//not full
+					//teacherChooseCbb.removeAllItems();
+					teacherChooseCbb.addItem("Teacher" + curTeacherID);
+				}
+			}
+			if(teacherChooseCbb.equals(null)) {
+				JOptionPane.showMessageDialog(null, "no satisfied teacher");
+			}
+			tBR.close();
+			tFR.close();
+			
+		}
+		//48-59
+		if(age >= 48 && age <= 59 ) {
+			File tFile = new File("./Teachers.csv");
+			FileReader tFR = new FileReader(tFile);
+			BufferedReader tBR = new BufferedReader(tFR);
+			String s;
+			//teacherChooseCbb.removeAllItems();
+			while((s = tBR.readLine()) != null) {
+				//String tString = tBR.readLine();
+				String[] line = s.split(",");
+
+				//check if the teacher's group is full
+				String curTeacherID = line[0];
+				String curTeacherType = line[5];
+				if(curTeacherType.equals("48-59") && line.length < 6 + 12) {
+					//not full
+					//teacherChooseCbb.removeAllItems();
+					teacherChooseCbb.addItem("Teacher" + curTeacherID);
+				}
+			}
+			if(teacherChooseCbb.equals(null)) {
+				JOptionPane.showMessageDialog(null, "no satisfied teacher");
+			}
+			tBR.close();
+			tFR.close();
+			
+		}
+		//60 on up
+		if(age >= 60) {
+			File tFile = new File("./Teachers.csv");
+			FileReader tFR = new FileReader(tFile);
+			BufferedReader tBR = new BufferedReader(tFR);
+			String s;
+			//teacherChooseCbb.removeAllItems();
+			while((s = tBR.readLine()) != null) {
+				//String tString = tBR.readLine();
+				String[] line = s.split(",");
+
+				//check if the teacher's group is full
+				String curTeacherID = line[0];
+				String curTeacherType = line[5];
+				if(curTeacherType.equals("60 on up") && line.length < 6 + 15) {
+					//not full
+					//teacherChooseCbb.removeAllItems();
+					teacherChooseCbb.addItem("Teacher" + curTeacherID);
+				}
+			}
+			if(teacherChooseCbb.equals(null)) {
+				JOptionPane.showMessageDialog(null, "no satisfied teacher");
+			}
+			tBR.close();
+			tFR.close();
+		}
+
+	}
+
+	public void addTeacherToTeacherFile(Teacher teacher) throws IOException {
+		//add teachers to teacher csv file
+		File file = new File("./Teachers.csv");
+		FileWriter filewriter = new FileWriter(file, true);  //true means rewritable
+
+		filewriter.append(teacher.getID() + "");
+		filewriter.append(",");
+		filewriter.append(teacher.getFirstName());
+		filewriter.append(",");
+		filewriter.append(teacher.getLastName());
+		filewriter.append(",");
+		filewriter.append(teacher.getAge() + "");
+		filewriter.append(",");
+		filewriter.append(teacher.getClassroomID() + "");
+		filewriter.append(",");
+		filewriter.append(teacher.getTeacherType());
+		filewriter.append("\n");
+
+		filewriter.close();
+	}
+
+	public void addTeacherToClassroom(Teacher teacher) throws IOException{
+		//add teacherid to classroom csv file
+		List<String> lines = Files.readAllLines(Paths.get("./Classrooms.csv"));
+		List<String> replaced = new ArrayList<>();
+
+		for(String line: lines) {
+			if(line.charAt(0) - '0' == teacher.getClassroomID()) {
+				replaced.add(line + "," + teacher.getID());
+			}else {
+				replaced.add(line);
+			}
+		}
+		Files.write(Paths.get("./Classrooms.csv"), replaced);
+	}
+
+
+	public void addStudentToStudentFile(Student student) throws IOException {
+		File file = new File("./Students.csv");
+		FileWriter filewriter = new FileWriter(file, true); 	//true means rewritable
+
+		filewriter.append(student.getID() + "");
+		filewriter.append(",");
+		filewriter.append(student.getFirstName());
+		filewriter.append(",");
+		filewriter.append(student.getLastName());
+		filewriter.append(",");
+		filewriter.append(student.getAge()+"");
+		filewriter.append(",");
+		filewriter.append(student.getTeacherID()+"");
+		filewriter.append("\n");
+
+		filewriter.close();
+	}
+
+	public void addStudentToTeacher(Student student) throws IOException {
+		//add studentid to teacher csv file
+		List<String> lines = Files.readAllLines(Paths.get("./Teachers.csv"));
+		List<String> replaced = new ArrayList<>();
+
+		for(String line: lines) {
+			if(line.charAt(0) - '0' == student.getTeacherID()) {
+				replaced.add(line + "," + student.getTeacherID());
+			}else {
+				replaced.add(line);
+			}
+		}
+		Files.write(Paths.get("./Teachers.csv"), replaced);
+	}
+
+}

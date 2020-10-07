@@ -1,0 +1,20 @@
+INDEX VERSION 1.131+D:\Amusement\workspace-201912-group-final-daycare\.metadata\.plugins\org.eclipse.jdt.core
+4284830473.index
+3996803440.index
+217264132.index
+344681153.index
+3211641946.index
+1620282363.index
+3540338301.index
+81436892.index
+2233980669.index
+2351544269.index
+1477808909.index
+2104002856.index
+1618562679.index
+1247505136.index
+3563570504.index
+2973343069.index
+1967623640.index
+2471114333.index
+4053030755.index
